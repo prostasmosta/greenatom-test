@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.2'
 
+gem 'bcrypt', '~> 3.1.7'
+
 gem 'bootsnap', require: false
 
 gem 'pg', '>= 0.18', '< 2.0'
@@ -18,8 +20,12 @@ group :development do
 end
 
 group :development, :test do
-  gem 'database_cleaner-active_record'
-  gem 'debug', platforms: %i[ mri mingw x64_mingw ]
+  gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'rspec-rails', '~> 6.0'
+end
+
+group :test do
+  gem 'shoulda-matchers', '~> 5.0'
 end
