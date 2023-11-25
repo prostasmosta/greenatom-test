@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: greenatom_development
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+  greenatom:
+    build:
+      context: .
+    environment:
+      POSTGRES_DB_HOST: postgres
+      POSTGRES_DB_USER: user
+      POSTGRES_DB_PASS: password
+    ports:
+      - "3000:3000"
