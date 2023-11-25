@@ -1,24 +1,40 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### To run app in docker container:
+```sh
+docker-compose up -d
+docker-compose exec greenatom rails db:migrate
+```
 
-Things you may want to cover:
+### To run tests:
+```sh
+bash testing-locally.sh
+```
 
-* Ruby version
+### To send POST request:
+```
+curl -X POST 'http://localhost:3000/users' -H 'Content-Type: application/json' \
+-d '{
+  "user": {
+    "name": "John",
+    "email": "john@example.com",
+    "password": "password",
+    "password_confirmation": "password",
+    "passport_data": {
+      "number": "12345",
+      "issued_by": "Moscow",
+      "issued_at": "2023-01-01"
+    }
+  }
+}'
+```
 
-* System dependencies
+### To send GET request for index:
+```
+curl 'http://localhost:3000/users?page=1&per_page=2' -H 'Authorization: Bearer AUTH_TOKEN_FROM_POST_RESPONSE_Authorization_HEADER'
+```
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### To send GET request for show:
+```
+curl 'http://localhost:3000/users/USER_ID' -H 'Authorization: Bearer AUTH_TOKEN_FROM_POST_RESPONSE_Authorization_HEADER'
+```
